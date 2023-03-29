@@ -1,21 +1,21 @@
-import './Navbar.css'
+import s from './Navbar.module.css'
 
 export function Navbar() {
   return (
-    <nav className="nav">
-      <div className="item">
+    <nav className={s.nav}>
+      <div className={s.item}>
         <a>Profile</a>
       </div>
-      <div className="item">
+      <div className={s.item}>
         <a>Massages</a>
       </div>
-      <div className="item">
+      <div className={s.item}>
         <a>News</a>
       </div>
-      <div className="item">
+      <div className={s.item}>
         <a>Music</a>
       </div>
-      <div className="item">
+      <div className={s.item}>
         <a>Settings</a>
       </div>
     </nav>
