@@ -1,0 +1,16 @@
+.dialogs {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.dialog {
+  padding: 5px;
+}
+
+.messages {
+}
+
+.message {
+  padding: 5px;
+}

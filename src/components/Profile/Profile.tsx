@@ -1,14 +1,12 @@
 import { MyPosts } from "./MyPosts/MyPosts";
 import s from "./Profile.module.css";
+import { PropfileInfo } from "./PropfileInfo/PropfileInfo";
 
 export function Profile() {
   return (
     <div className={s.content}>
-      <div>
-        <img src="https://pbs.twimg.com/media/EL_CSbzXYAAviQL.jpg" />
-      </div>
-      <div>ava + discription</div>
-      <MyPosts/>
+      <PropfileInfo />
+      <MyPosts />
     </div>
   );
 }

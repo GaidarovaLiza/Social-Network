@@ -2,3 +2,9 @@
   grid-area: n;
   background-color: burlywood;
 }
+
+a {
+  color: white;
+  text-decoration: none;
+  margin: 35px;
+}
