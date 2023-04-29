@@ -1,12 +1,13 @@
-import { MyPosts } from "./MyPosts/MyPosts";
+import {MyPosts} from "./MyPosts/MyPosts";
 import s from "./Profile.module.css";
-import { PropfileInfo } from "./PropfileInfo/PropfileInfo";
+import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
 export function Profile() {
-  return (
-    <div className={s.content}>
-      <PropfileInfo />
-      <MyPosts />
-    </div>
-  );
+    return (
+        <div className={s.content}>
+            <MyPosts/>
+            <ProfileInfo/>
+
+        </div>
+    );
 }

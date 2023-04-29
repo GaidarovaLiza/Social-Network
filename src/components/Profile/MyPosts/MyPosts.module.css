@@ -1,0 +1,53 @@
+.rowWrapper {
+    display: flex;
+    border-bottom: 0.1px solid #E6E6FA;
+    background-clip: padding-box;
+    padding: 20px;
+}
+
+.img {
+    width: 60px;
+    height: 60px;
+    border-radius: 25px;
+    margin-right: 15px;
+}
+
+.textarea {
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    padding: 10px;
+    font-size: 16px;
+    color: #333;
+    resize: vertical;
+}
+
+.textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.button {
+    display: block;
+    vertical-align: middle;
+    height: 40px;
+    background-color: #007bff;
+    color: #fff;
+    padding: 2px 30px;
+    border: none;
+    border-radius: 18px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    margin-left: 25px;
+}
+
+.button:hover {
+    background-color: #0069d9;
+}
+
+.button:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}

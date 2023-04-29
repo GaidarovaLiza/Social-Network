@@ -1,9 +1,10 @@
 import s from "./Header.module.css";
 
 export function Header() {
-  return (
-    <header className={s.header}>
-      <img src="https://e7.pngegg.com/pngimages/615/494/png-clipart-logo-design-text-symbol.png" />
-    </header>
-  );
+    return (
+        <header className={s.header}>
+            <span className={s.logo}>Friends Finder</span>
+            <input placeholder={'Search friends'} className={s.input} type="text"/>
+        </header>
+    );
 }
