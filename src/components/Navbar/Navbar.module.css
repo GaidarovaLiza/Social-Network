@@ -15,3 +15,8 @@ a {
     background-clip: padding-box;
     padding: 20px;
 }
+
+.item:hover {
+    text-decoration: underline;
+    color: #007bff;
+}
