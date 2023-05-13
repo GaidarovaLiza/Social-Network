@@ -37,13 +37,15 @@ function App() {
             <div className={s.appWrapper}>
                 <Header/>
                 <Navbar/>
+                <div className='routes'>
                 <Routes>
-                    <Route path="/dialogs" element={Dialogs}/>
+                    <Route path="/dialogs" element={<Dialogs/>}/>
                     <Route path="/profile" element={<Profile addPost={addPost} posts={posts}/>}/>
                     <Route path="/music" element={Music}/>
                     <Route path="/news" element={News}/>
                     <Route path="/settings" element={Settings}/>
                 </Routes>
+                </div>
             </div>
         </BrowserRouter>
     );

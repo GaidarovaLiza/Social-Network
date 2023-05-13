@@ -1,16 +1,19 @@
 .dialogs {
-  display: flex;
-  justify-content: space-around;
-  padding: 20px;
+    margin-top: 55px;
+    padding: 50px;
+    display: flex;
+    justify-content: space-around;
+    max-width: 800px; /* задаем максимальную ширину для контента */
+    width: 100%; /* задаем ширину 100%, чтобы контент занимал всю доступную ширину */
 }
 
 .dialog {
-  padding: 5px;
+    padding: 25px;
 }
 
 .messages {
 }
 
 .message {
-  padding: 5px;
+    padding: 5px;
 }

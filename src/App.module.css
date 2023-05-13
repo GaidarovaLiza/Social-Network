@@ -1,10 +1,23 @@
 .appWrapper {
+    /*max-width: 1200px;*/
+    /*margin: 0 auto;*/
+    /*display: grid;*/
+    /*grid-template-areas:*/
+    /*"h h"*/
+    /*"n c";*/
+    /*grid-template-rows: 60px 1fr;*/
+    /*grid-template-columns: 2fr 10fr;*/
+    display: flex;
+    position: relative;
+    height: 100vh; /* задаем высоту контейнера на всю высоту окна браузера */
     max-width: 1200px;
     margin: 0 auto;
-    display: grid;
-    grid-template-areas:
-    "h h"
-    "n c";
-    grid-template-rows: 60px 1fr;
-    grid-template-columns: 2fr 10fr;
+}
+
+.routes {
+    flex: 1; /* контент должен занимать всю доступную ширину */
+    margin-left: 200px; /* добавляем отступ слева, чтобы контент не перекрывал панель навигации */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
