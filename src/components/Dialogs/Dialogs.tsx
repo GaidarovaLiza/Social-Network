@@ -1,34 +1,39 @@
 import {DialogItem} from "./DialogItem/DialogItem";
 import s from "./Dialogs.module.css";
-import {v1} from "uuid";
 import {MessageItem} from "./MessageItem/MessageItem";
+import React from "react";
+import {DialogType} from "../../Redax/State";
+import {DialogHeader} from "./DialogHeader/DialogHeader";
 
-export const Dialogs = () => {
+type DialogsPropsType = {
+    state: DialogType
+}
 
-    const users = [
-        {id: v1(), name: 'Bob'},
-        {id: v1(), name: 'Alex'},
-        {id: v1(), name: 'Ann'},
-    ]
+export const Dialogs: React.FC<DialogsPropsType> = (
+    {
+        state
+    }
+) => {
 
-    const messages = [
-        {id: v1(), message: 'Hi!'},
-        {id: v1(), message: 'How are you doing?'},
-        {id: v1(), message: 'Yo!'},
-    ]
-
-    const ElementsDialogItem = users.map(el => <DialogItem id={el.id} name={el.name}/>)
-    const ElementsMessageItem = messages.map(m => {
+    const ElementsDialogItem = state.users.map(el => <DialogItem id={el.id} name={el.name}/>)
+    const ElementsMessageItem = state.messages.map(m => {
         return (<MessageItem id={m.id} message={m.message}/>)
     })
 
     return (
-        <div className={s.dialogs}>
-            <div className={s.dialogItems}>
-                {ElementsDialogItem}
+        <div className={s.mainWrapper}>
+            <div className={s.dialogs}>
+                <div className={s.dialogItems}>
+                    {ElementsDialogItem}
+                </div>
+                <div className={s.messages}>
+                    <DialogHeader/>
+                    {ElementsMessageItem}
+                </div>
             </div>
-            <div className={s.messages}>
-                {ElementsMessageItem}
+            <div className={s.messageInputContainer}>
+                <input type="text" placeholder="Напишите сообщение..."/>
+                <button className={s.sendButton}>Отправить</button>
             </div>
         </div>
     );

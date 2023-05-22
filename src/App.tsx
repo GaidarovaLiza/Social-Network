@@ -10,6 +10,7 @@ import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import s from './App.module.css'
 import {v1} from "uuid";
+import {StateType} from "./Redax/State";
 
 export type PostsType = PostType[]
 
@@ -20,8 +21,14 @@ type PostType = {
     likes: number
 }
 
+type PropsType = {
+    state: StateType
+}
 
-function App() {
+export const App: React.FC<PropsType> = (
+    {
+        state
+    }) => {
     const [posts, setPost] = useState([
         {id: v1(), name: 'John Doe', body: 'How are you?', likes: 0},
         {id: v1(), name: 'John Doe', body: 'This is my first post', likes: 0},
@@ -38,13 +45,13 @@ function App() {
                 <Header/>
                 <Navbar/>
                 <div className='routes'>
-                <Routes>
-                    <Route path="/dialogs" element={<Dialogs/>}/>
-                    <Route path="/profile" element={<Profile addPost={addPost} posts={posts}/>}/>
-                    <Route path="/music" element={Music}/>
-                    <Route path="/news" element={News}/>
-                    <Route path="/settings" element={Settings}/>
-                </Routes>
+                    <Routes>
+                        <Route path="/dialogs" element={<Dialogs state={state.dialogsPage}/>}/>
+                        <Route path="/profile" element={<Profile addPost={addPost} posts={posts}/>}/>
+                        <Route path="/music" element={Music}/>
+                        <Route path="/news" element={News}/>
+                        <Route path="/settings" element={Settings}/>
+                    </Routes>
                 </div>
             </div>
         </BrowserRouter>

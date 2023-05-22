@@ -1,6 +1,6 @@
 import s from "./MyPosts.module.css";
 import {Post} from "./Post/Post";
-import {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, useState} from "react";
 import {PostsType} from "../../../App";
 
 type PropsType = {
@@ -8,7 +8,12 @@ type PropsType = {
     addPost: (body: string) => void
 }
 
-export function MyPosts(props: PropsType) {
+export const MyPosts: React.FC<PropsType> = (
+    {
+        posts,
+        addPost
+    }
+) => {
     const [value, setValue] = useState('')
 
 
@@ -17,11 +22,11 @@ export function MyPosts(props: PropsType) {
     }
 
     const onClickHandler = () => {
-        props.addPost(value)
+        addPost(value)
         setValue('')
     }
 
-    const postComponents = props.posts.map(el => {
+    const postComponents = posts.map(el => {
         return (
             <div>
                 <Post body={el.body} like={el.likes} name={el.name}/>

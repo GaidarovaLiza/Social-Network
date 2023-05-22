@@ -1,19 +1,67 @@
+.mainWrapper {
+    max-width: 1200px;
+}
+
 .dialogs {
     margin-top: 55px;
     padding: 50px;
     display: flex;
-    justify-content: space-around;
+    justify-content: inherit;
     max-width: 800px; /* задаем максимальную ширину для контента */
     width: 100%; /* задаем ширину 100%, чтобы контент занимал всю доступную ширину */
 }
 
 .dialog {
     padding: 25px;
+    margin-right: 20px;
 }
 
 .messages {
+    margin-left: 50px;
 }
 
 .message {
     padding: 5px;
 }
+
+.messageInputContainer {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-top: 1px solid #ddd;
+    padding: 8px 16px;
+    margin-left: 250px;
+    margin-top: 100px;
+}
+
+.messageInputContainer input[type="text"] {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 12px;
+    border-radius: 20px;
+    background-color: #f2f2f2;
+}
+
+.messageInputContainer input[type="text"]::placeholder {
+    color: #a9a9a9;
+}
+
+.messageInputContainer .sendButton {
+    background-color: #0084ff;
+    color: #fff;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 12px 16px;
+    border-radius: 20px;
+    margin-left: 16px;
+    cursor: pointer;
+}
+
+.messageInputContainer .sendButton:hover {
+    background-color: #0066cc;
+}
+
+
