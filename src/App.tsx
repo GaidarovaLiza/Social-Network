@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useReducer, useState} from "react";
 import "./App.module.css";
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
@@ -11,6 +11,7 @@ import {Settings} from "./components/Settings/Settings";
 import s from './App.module.css'
 import {v1} from "uuid";
 import {StateType} from "./Redax/State";
+import {addPostAC, postsReducer} from "./Redax/postsReducer";
 
 export type PostsType = PostType[]
 
@@ -29,14 +30,10 @@ export const App: React.FC<PropsType> = (
     {
         state
     }) => {
-    const [posts, setPost] = useState([
-        {id: v1(), name: 'John Doe', body: 'How are you?', likes: 0},
-        {id: v1(), name: 'John Doe', body: 'This is my first post', likes: 0},
-    ])
+    const [posts, dispatchPost] = useReducer(postsReducer, state.profilePage.posts)
 
     const addPost = (body: string) => {
-        let newPost = {id: v1(), name: 'John Doe', body: body, likes: 0}
-        setPost([newPost, ...posts])
+       dispatchPost(addPostAC(body))
     }
 
     return (

@@ -1,6 +1,4 @@
 import s from "./Post.module.css";
-import {ChangeEvent, useState} from "react";
-import {PostsType} from "../../../../App";
 import Like from "./Like";
 
 type PostPropsType = {
