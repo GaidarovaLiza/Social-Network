@@ -1,4 +1,4 @@
-import React, {useReducer, useState} from "react";
+import React from "react";
 import "./App.module.css";
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
@@ -9,9 +9,6 @@ import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import s from './App.module.css'
-import {v1} from "uuid";
-import {StateType} from "./Redax/State";
-import {addPostAC, postsReducer} from "./Redax/postsReducer";
 
 export type PostsType = PostType[]
 
@@ -22,19 +19,22 @@ type PostType = {
     likes: number
 }
 
-type PropsType = {
-    state: StateType
+export type MessagesType = MessageType[]
+
+export type MessageType = {
+    id: string
+    message: string
 }
 
-export const App: React.FC<PropsType> = (
-    {
-        state
-    }) => {
-    const [posts, dispatchPost] = useReducer(postsReducer, state.profilePage.posts)
+export type UsersType = UserType[]
 
-    const addPost = (body: string) => {
-       dispatchPost(addPostAC(body))
-    }
+export type UserType = {
+    id: string,
+    name: string
+}
+
+
+export const App = () => {
 
     return (
         <BrowserRouter>
@@ -43,8 +43,8 @@ export const App: React.FC<PropsType> = (
                 <Navbar/>
                 <div className='routes'>
                     <Routes>
-                        <Route path="/dialogs" element={<Dialogs state={state.dialogsPage}/>}/>
-                        <Route path="/profile" element={<Profile addPost={addPost} posts={posts}/>}/>
+                        <Route path="/dialogs" element={<Dialogs/>}/>
+                        <Route path="/profile" element={<Profile/>}/>
                         <Route path="/music" element={Music}/>
                         <Route path="/news" element={News}/>
                         <Route path="/settings" element={Settings}/>

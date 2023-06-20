@@ -2,10 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {state} from './Redax/State'
+import {Provider} from "react-redux";
+import {store} from "./Redax/store";
 
 
 ReactDOM.render(
-    <App state={state}/>,
-    document.getElementById('root')
-);
+    <Provider store={store}>
+        <App/>
+    </Provider>,
+document.getElementById('root')
+)
+;
