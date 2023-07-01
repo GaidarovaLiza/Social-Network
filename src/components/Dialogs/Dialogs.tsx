@@ -10,7 +10,7 @@ import {AppRootStateType} from "../../Redax/store";
 
 export const Dialogs = () => {
     let dialogs = useSelector<AppRootStateType, MessagesType>(state => state.DialogsReducer)
-    let users = useSelector<AppRootStateType, UsersType>(state => state.UsersReducer)
+    let users = useSelector<AppRootStateType, UsersType>(state => state.UsersChatReducer)
 
     const dispatch = useDispatch()
 

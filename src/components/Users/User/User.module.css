@@ -1,0 +1,67 @@
+/* User List */
+.userList {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+/* User */
+.user {
+    width: 300px;
+    display: flex;
+    align-items: center;
+    margin: 15px;
+}
+
+/* User Avatar */
+.userAvatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.userAvatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* User Info */
+.userInfo {
+    flex-grow: 1;
+}
+
+.userName {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.userLocation {
+    font-size: 14px;
+    color: #888;
+}
+
+/* User Action */
+.userAction {
+    margin-left: auto;
+}
+
+.btnFollow {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    background-color: #1877f2;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btnFollow:hover {
+    background-color: #166fe5;
+}

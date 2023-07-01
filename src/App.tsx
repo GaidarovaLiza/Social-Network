@@ -9,6 +9,7 @@ import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import s from './App.module.css'
+import {Users} from "./components/Users/Users";
 
 export type PostsType = PostType[]
 
@@ -48,6 +49,7 @@ export const App = () => {
                         <Route path="/music" element={Music}/>
                         <Route path="/news" element={News}/>
                         <Route path="/settings" element={Settings}/>
+                        <Route path="/users" element={<Users/>}/>
                     </Routes>
                 </div>
             </div>
