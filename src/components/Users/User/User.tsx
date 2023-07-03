@@ -3,15 +3,23 @@ import s from './User.module.css'
 
 type UserPropsType = {
     name: string
-    id: string
-    country: string
+    id: number
     followed: boolean
-    followClickHandler: (id: string) => void
-    unFollowClickHandler: (id: string) => void
+    followClickHandler: (id: number) => void
+    unFollowClickHandler: (id: number) => void
 }
 
 
-export const User: FC<UserPropsType> = ({name, id, country, followed, followClickHandler, unFollowClickHandler}) => {
+export const User: FC<UserPropsType> = (
+    {
+        name,
+        id,
+        followed,
+        followClickHandler,
+        unFollowClickHandler,
+    }) => {
+
+
     return (
         <div className={s.userList}>
             <div className={s.user}>
@@ -20,7 +28,6 @@ export const User: FC<UserPropsType> = ({name, id, country, followed, followClic
                 </div>
                 <div className={s.userInfo}>
                     <div className={s.userName}>{name}</div>
-                    <div className={s.userLocation}>{country}</div>
                 </div>
                 <div className={s.userAction}>
                     {followed
