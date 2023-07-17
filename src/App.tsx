@@ -10,6 +10,7 @@ import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import s from './App.module.css'
 import {Users} from "./components/Users/Users";
+import UsersClass from "./components/Users/UsersClass";
 
 export type PostsType = PostType[]
 

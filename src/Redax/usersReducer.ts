@@ -1,4 +1,4 @@
-type UserType = {
+export type UserType = {
     name: string;
     id: number;
     uniqueUrlName: string | null;
@@ -13,16 +13,20 @@ type UserType = {
 export  type UsersDataType = {
     items: UserType[];
     totalCount: number;
+    pageSize: number;
+    currentPage: number;
     error: string | null;
 }
 
 const initialState: UsersDataType = {
     items: [],
     totalCount: 0,
+    pageSize: 7,
+    currentPage: 1,
     error: null
 };
 
-type ActionType = FollowACType | UnfollowACType | SetUsersACType
+type ActionType = FollowACType | UnfollowACType | SetUsersACType | SetCurrentPageACType
 
 export const UsersReducer = (state: UsersDataType = initialState, action: ActionType): UsersDataType => {
     switch (action.type) {
@@ -41,7 +45,13 @@ export const UsersReducer = (state: UsersDataType = initialState, action: Action
         case "SET-USERS": {
             return {
                 ...state,
-                items: [...state.items, ...action.payload.users]
+                items: [...action.payload.users]
+            }
+        }
+        case "SET-CURRENT-PAGE": {
+            return {
+                ...state,
+                currentPage: action.payload.pageNumber
             }
         }
         default: {
@@ -74,5 +84,14 @@ export const setUsersAC = (users: UserType[]) => {
     return {
         type: 'SET-USERS',
         payload: {users}
+    } as const
+}
+
+type SetCurrentPageACType = ReturnType<typeof setCurrentPageAC>
+
+export const setCurrentPageAC = (pageNumber: number) => {
+    return {
+        type: "SET-CURRENT-PAGE",
+        payload: {pageNumber}
     } as const
 }
