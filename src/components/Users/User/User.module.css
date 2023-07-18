@@ -8,10 +8,15 @@
 
 /* User */
 .user {
-    width: 300px;
+    border: 0.1px solid #E6E6FA;
+    width: 400px;
     display: flex;
     align-items: center;
-    margin: 15px;
+    padding: 20px;
+}
+
+.user:hover {
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* User Avatar */
@@ -54,7 +59,7 @@
     padding: 10px 20px;
     font-size: 14px;
     font-weight: 600;
-    background-color: #1877f2;
+    background-color: #3b5998;
     color: #fff;
     border: none;
     border-radius: 25px;

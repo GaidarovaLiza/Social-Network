@@ -1,10 +1,10 @@
 import React from "react";
 import {useState} from "react";
 import s from './Pagination.module.css'
-import {setCurrentPageAC, setUsersAC, UsersDataType} from "../../Redax/usersReducer";
+import {setCurrentPageAC, setUsersAC,} from "../../Redax/usersReducer";
 import axios from "axios";
-import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../../Redax/store";
+import {useDispatch} from "react-redux";
+import {portionSize, startPortionNumber} from "../Users/constants";
 
 type PropsType = {
     pages: Array<number>
@@ -21,10 +21,8 @@ export const Pagination: React.FC<PropsType> = ({
                                                     pageSize,
 
                                                 }) => {
-    const [portionNumber, setPortionNumber] = useState(1);
+    const [portionNumber, setPortionNumber] = useState(startPortionNumber);
     const dispatch = useDispatch()
-
-    const portionSize = 10;
 
     const leftPortionPageNumber = portionNumber * portionSize - portionSize;
     const rightPortionPageNumber = portionNumber * portionSize;
@@ -38,25 +36,20 @@ export const Pagination: React.FC<PropsType> = ({
             })
     }
 
-    const onNextPortionHandler = () => {
-        setPortionNumber(portionNumber + 1);
-    };
-
-    const onPrevPortionHandler = () => {
-        setPortionNumber(portionNumber - 1);
-    };
+    const onNextPortionHandler = () => setPortionNumber(portionNumber + 1);
+    const onPrevPortionHandler = () => setPortionNumber(portionNumber - 1)
 
     return (
-        <div>
-            {portionNumber > 1 && (
-                <button onClick={onPrevPortionHandler}>Prev</button>
+        <div className={s.paginationContainer}>
+            {portionNumber > startPortionNumber && (
+                <button className={s.paginationButton} onClick={onPrevPortionHandler}>Prev</button>
             )}
             {pages
                 .filter((p) => p >= leftPortionPageNumber && p <= rightPortionPageNumber && leftPortionPageNumber >= 0)
                 .map((page) => (
                     <span
                         key={page}
-                        className={currentPage === page ? s.selected : s.pageNumber}
+                        className={currentPage === page ? s.selectedPage : s.pageNumber}
                         onClick={() => onPageChangedHandler(page)}
                     >
             {page}{" "}
@@ -64,7 +57,7 @@ export const Pagination: React.FC<PropsType> = ({
                 ))
             }
             {rightPortionPageNumber < pageCount && (
-                <button onClick={onNextPortionHandler}>Next</button>
+                <button className={s.paginationButton} onClick={onNextPortionHandler}>Next</button>
             )}
         </div>
     );

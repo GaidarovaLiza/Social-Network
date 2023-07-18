@@ -1,5 +1,6 @@
 .mainWrapper {
-    max-width: 1200px;
+    /*max-width: 1200px;*/
+
 }
 
 .dialogs {
@@ -7,12 +8,10 @@
     padding: 50px;
     display: flex;
     justify-content: inherit;
-    /* задаем ширину 100%, чтобы контент занимал всю доступную ширину */
 }
 
 .dialog {
     padding: 25px;
-    margin-right: 20px;
 }
 
 .messages {
@@ -27,7 +26,6 @@
 .messageInputContainer {
     display: flex;
     align-items: center;
-    width: 100%;
     border-top: 1px solid #ddd;
     padding: 8px 16px;
     margin-left: 250px;
@@ -40,6 +38,7 @@
 }
 
 .messageInputContainer input[type="text"] {
+    max-width: 60%;
     flex: 1;
     border: none;
     outline: none;
@@ -51,10 +50,11 @@
 
 .messageInputContainer input[type="text"]::placeholder {
     color: #a9a9a9;
+
 }
 
 .messageInputContainer .sendButton {
-    background-color: #0084ff;
+    background-color: #3b5998;
     color: #fff;
     border: none;
     outline: none;
