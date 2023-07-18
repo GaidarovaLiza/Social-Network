@@ -3,6 +3,7 @@ import {useState} from "react";
 import s from './Pagination.module.css'
 
 type PropsType = {
+    pages: Array<number>
     currentPage: number;
     pageSize: number;
     totalItemsCount: number;
@@ -10,6 +11,7 @@ type PropsType = {
 };
 
 export const Pagination: React.FC<PropsType> = ({
+                                                    pages,
                                                     currentPage,
                                                     pageSize,
                                                     totalItemsCount,
@@ -17,11 +19,6 @@ export const Pagination: React.FC<PropsType> = ({
                                                 }) => {
     const [portionNumber, setPortionNumber] = useState(1);
     const pagesCount = Math.ceil(totalItemsCount / pageSize);
-    const pages = [];
-
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i);
-    }
 
     const portionSize = 10;
     const leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;
@@ -34,6 +31,8 @@ export const Pagination: React.FC<PropsType> = ({
     const onPrevPortionHandler = () => {
         setPortionNumber(portionNumber - 1);
     };
+
+    console.log(pages)
 
     return (
         <div>

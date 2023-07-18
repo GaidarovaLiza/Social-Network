@@ -50,6 +50,7 @@ export const Users = () => {
             )}
             <div>
                 <Pagination
+                    pages={pages}
                     currentPage={users.currentPage}
                     pageSize={users.pageSize}
                     totalItemsCount={users.totalCount}
