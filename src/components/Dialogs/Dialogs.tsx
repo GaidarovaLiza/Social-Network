@@ -14,6 +14,8 @@ export const Dialogs = () => {
 
     const dispatch = useDispatch()
 
+    //add commit
+
     const [newMessage, setNewMessage] = useState("");
 
     const ElementsDialogItem = users.map(el => <DialogItem id={el.id} name={el.name}/>)
