@@ -1,7 +1,7 @@
 import {MyPosts} from "./MyPosts/MyPosts";
 import s from "./Profile.module.css";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {PostsType} from "../../App";
+import {PostsType} from "../../app/App";
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../Redax/store";

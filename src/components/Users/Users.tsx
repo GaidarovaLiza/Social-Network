@@ -1,12 +1,15 @@
 import React, {useEffect} from 'react';
 import s from './Users.module.css'
-import { useSelector} from "react-redux";
-import {AppRootStateType, useAppDispatch} from "../../Redax/store";
+import {useSelector} from "react-redux";
+import {AppRootStateType, useAppDispatch, useAppSelector} from "../../Redax/store";
 import {followAC, getUsersTC, unfollowAC, UsersDataType} from "../../Redax/usersReducer";
 import {User} from "./User/User";
 import {Pagination} from "../Pagination/Paginations";
+import {CircularProgress} from "@mui/material";
+import {RequestStatusType} from "../../app/appReducer";
 
 export const Users = () => {
+    const status = useAppSelector<RequestStatusType>((state) => state.appReducer.status)
     const users = useSelector<AppRootStateType, UsersDataType>(state => state.UsersReducer)
     const dispatch = useAppDispatch()
 
@@ -19,6 +22,7 @@ export const Users = () => {
 
     return (
         <div className={s.mainContainer}>
+            {status === 'loading' && <CircularProgress/>}
             {users.items.map(u => <User name={u.name}
                                         id={u.id}
                                         followed={u.followed}

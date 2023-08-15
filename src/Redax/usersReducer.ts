@@ -1,5 +1,6 @@
 import {Dispatch} from "redux";
 import {usersAPI} from "../api/users-api";
+import {RequestStatusType, setStatusAC} from "../app/appReducer";
 
 const initialState: UsersDataType = {
     items: [],
@@ -49,10 +50,16 @@ export const setPageCountAC = (pageCount: number) => ({type: 'SET-PAGE-COUNT', p
 export const setPortionNumberAC = (portionNumber: number) => ({type: "SET-PORTION-NUMBER", portionNumber} as const);
 export const nextPortionAC = (portionNumber: number) => ({type: "NEXT-PORTION", portionNumber} as const);
 export const prevPortionAC = (portionNumber: number) => ({type: "PREV-PORTION", portionNumber} as const);
+export const changeUserStatusAC = (id: string, status: RequestStatusType) => ({
+    type: 'CHANGE-USER-STATUS',
+    id,
+    status
+} as const)
 
 //thunk
 
-export const getUsersTC = (currentPage: number, pageSize: number) => (dispatch: Dispatch<ActionType>) => {
+export const getUsersTC = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
+    dispatch(setStatusAC('loading'))
     usersAPI.getUsers(currentPage, pageSize)
         .then((res) => {
             dispatch(setUsersAC(res.data.items))
@@ -66,6 +73,7 @@ export const getUsersTC = (currentPage: number, pageSize: number) => (dispatch: 
 
             dispatch(setPagesAC(pages));
             dispatch(setPageCountAC(pageCount));
+            dispatch(setStatusAC('succeeded'));
         })
 }
 export const getPageTC = (pageNumber: number, pageSize: number) => (dispatch: Dispatch<ActionType>) => {
@@ -110,3 +118,4 @@ type ActionType =
     | ReturnType<typeof setPortionNumberAC>
     | ReturnType<typeof nextPortionAC>
     | ReturnType<typeof prevPortionAC>
+    | ReturnType<typeof changeUserStatusAC>

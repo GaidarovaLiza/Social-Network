@@ -3,10 +3,12 @@ import s from "./Dialogs.module.css";
 import {MessageItem} from "./MessageItem/MessageItem";
 import React, {ChangeEvent, useState} from "react";
 import {DialogHeader} from "./DialogHeader/DialogHeader";
-import {MessagesType, UsersType} from "../../App";
+import {MessagesType, UsersType} from "../../app/App";
 import {addMessageAC} from "../../Redax/dialogsReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../Redax/store";
+import Button from "@mui/material/Button";
+import SendIcon from '@mui/icons-material/Send';
 
 export const Dialogs = () => {
     let dialogs = useSelector<AppRootStateType, MessagesType>(state => state.DialogsReducer)
@@ -52,7 +54,12 @@ export const Dialogs = () => {
                        onChange={sendMessageHandler}
                        type="text"
                        placeholder="Напишите сообщение..."/>
-                <button onClick={sendMessage} className={s.sendButton}>Отправить</button>
+                <Button variant="contained"
+                        endIcon={<SendIcon/>}
+                        onClick={sendMessage}
+                >
+                    Send
+                </Button>
             </div>
         </div>
     );

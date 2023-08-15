@@ -1,7 +1,7 @@
 import s from "./MyPosts.module.css";
 import {Post} from "./Post/Post";
 import React, {ChangeEvent, useState} from "react";
-import {PostsType} from "../../../App";
+import {PostsType} from "../../../app/App";
 
 type PropsType = {
     posts: PostsType
