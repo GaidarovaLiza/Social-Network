@@ -1,15 +1,5 @@
 .appWrapper {
-    /*max-width: 1200px;*/
-    /*margin: 0 auto;*/
-    /*display: grid;*/
-    /*grid-template-areas:*/
-    /*"h h"*/
-    /*"n c";*/
-    /*grid-template-rows: 60px 1fr;*/
-    /*grid-template-columns: 2fr 10fr;*/
     display: flex;
-    justify-content: space-evenly;
-    position: relative;
     height: 100vh; /* задаем высоту контейнера на всю высоту окна браузера */
     max-width: 1200px;
     margin: 0 auto;
@@ -18,7 +8,7 @@
 .routes {
     /* контент должен занимать всю доступную ширину */
     display: flex;
-    flex: 1;
+    width: 2000px;
     justify-content: center;
     align-items: center;
 }

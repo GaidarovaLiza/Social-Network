@@ -11,7 +11,7 @@ let initialState: PostType[] = [
 export const PostsReducer = (state = initialState, action: ActionType): PostType[] => {
     switch (action.type) {
         case 'ADD-POST': {
-            let newPost = {id: v1(), name: 'John Doe', body: action.payload.body, likes: 0}
+            let newPost = {id: v1(), name: 'John Doe', body: action.body, likes: 0}
             return [newPost, ...state]
         }
         default: {
@@ -22,11 +22,4 @@ export const PostsReducer = (state = initialState, action: ActionType): PostType
 
 type AddPostACType = ReturnType<typeof addPostAC>
 
-export const addPostAC = (body: string) => {
-    return {
-        type: "ADD-POST",
-        payload: {
-            body
-        }
-    } as const
-}
+export const addPostAC = (body: string) => ({type: "ADD-POST", body} as const)

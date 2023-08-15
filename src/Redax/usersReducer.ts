@@ -1,6 +1,17 @@
 import {Dispatch} from "redux";
 import {usersAPI} from "../api/users-api";
 
+const initialState: UsersDataType = {
+    items: [],
+    totalCount: 0,
+    pages: [],
+    pageSize: 7,
+    pageCount: 0,
+    currentPage: 1,
+    portionNumber: 1,
+    error: null
+};
+
 export const UsersReducer = (state: UsersDataType = initialState, action: ActionType): UsersDataType => {
     switch (action.type) {
         case 'FOLLOW':
@@ -36,12 +47,12 @@ export const setCurrentPageAC = (pageNumber: number) => ({type: "SET-CURRENT-PAG
 export const setPagesAC = (pages: Array<number>) => ({type: 'SET-PAGES', pages} as const);
 export const setPageCountAC = (pageCount: number) => ({type: 'SET-PAGE-COUNT', pageCount} as const);
 export const setPortionNumberAC = (portionNumber: number) => ({type: "SET-PORTION-NUMBER", portionNumber} as const);
-export const nextPortionAC= (portionNumber: number) => ({type: "NEXT-PORTION", portionNumber} as const);
+export const nextPortionAC = (portionNumber: number) => ({type: "NEXT-PORTION", portionNumber} as const);
 export const prevPortionAC = (portionNumber: number) => ({type: "PREV-PORTION", portionNumber} as const);
 
 //thunk
 
-export const getUsersTC = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
+export const getUsersTC = (currentPage: number, pageSize: number) => (dispatch: Dispatch<ActionType>) => {
     usersAPI.getUsers(currentPage, pageSize)
         .then((res) => {
             dispatch(setUsersAC(res.data.items))
@@ -57,7 +68,7 @@ export const getUsersTC = (currentPage: number, pageSize: number) => (dispatch: 
             dispatch(setPageCountAC(pageCount));
         })
 }
-export const getPageTC = (pageNumber: number, pageSize: number) => (dispatch: Dispatch) => {
+export const getPageTC = (pageNumber: number, pageSize: number) => (dispatch: Dispatch<ActionType>) => {
     usersAPI.getPages(pageNumber, pageSize)
         .then((res) => {
             dispatch(setUsersAC(res.data.items))
@@ -78,7 +89,7 @@ export type UserType = {
     followed: boolean;
 }
 
-export  type UsersDataType = {
+export type UsersDataType = {
     items: UserType[];
     totalCount: number;
     pages: Array<number>
@@ -88,17 +99,6 @@ export  type UsersDataType = {
     portionNumber: number;
     error: string | null;
 }
-
-const initialState: UsersDataType = {
-    items: [],
-    totalCount: 0,
-    pages: [],
-    pageSize: 7,
-    pageCount: 0,
-    currentPage: 1,
-    portionNumber: 1,
-    error: null
-};
 
 type ActionType =
     ReturnType<typeof followAC>
