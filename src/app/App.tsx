@@ -3,16 +3,14 @@ import "./App.module.css";
 import {Navbar} from "../components/Navbar/Navbar";
 import {Profile} from "../components/Profile/Profile";
 import {Dialogs} from "../components/Dialogs/Dialogs";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Navigate, Route, Routes, useLocation} from "react-router-dom";
 import {Music} from "../components/Music/Music";
 import {News} from "../components/News/News";
 import {Settings} from "../components/Settings/Settings";
 import s from './App.module.css'
 import {Users} from "../components/Users/Users";
-import LinearProgress from '@mui/material/LinearProgress';
 import {Header} from "../components/Header/Header";
-import Box from "@mui/material/Box/Box";
-import {CircularProgress} from "@mui/material";
+import {Login} from "../components/Login/Login";
 
 export type PostsType = PostType[]
 
@@ -37,26 +35,27 @@ export type UserType = {
     name: string
 }
 
-
 export const App = () => {
+    const location = useLocation();
 
     return (
-        <BrowserRouter>
-            <div className={s.appWrapper}>
-                <Header/>
-                <Navbar/>
-                <div className='routes'>
-                    <Routes>
-                        <Route path="/dialogs" element={<Dialogs/>}/>
-                        <Route path="/profile" element={<Profile/>}/>
-                        <Route path="/music" element={Music}/>
-                        <Route path="/news" element={News}/>
-                        <Route path="/settings" element={Settings}/>
-                        <Route path="/users" element={<Users/>}/>
-                    </Routes>
-                </div>
+        <div className={s.appWrapper}>
+            {location.pathname !== '/login' && <Header/>}
+            {location.pathname !== '/login' && <Navbar/>}
+            <div className='routes'>
+                <Routes>
+                    <Route path={"/"} element={<Profile/>}/>
+                    <Route path={'login'} element={<Login/>}/>
+                    <Route path={"dialogs"} element={<Dialogs/>}/>
+                    <Route path={"music"} element={Music}/>
+                    <Route path={"news"} element={News}/>
+                    <Route path={"settings"} element={Settings}/>
+                    <Route path={"users"} element={<Users/>}/>
+                    <Route path={'404'} element={<h1 style={{textAlign: 'center'}}>404: PAGE NOT FOUND</h1>}/>
+                    <Route path='*' element={<Navigate to={'404'}/>}/>
+                </Routes>
             </div>
-        </BrowserRouter>
+        </div>
     );
 }
 

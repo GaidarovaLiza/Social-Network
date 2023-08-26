@@ -1,39 +1,12 @@
-import React, {useState} from 'react';
+import Checkbox from '@mui/material/Checkbox';
+import React from 'react';
 import s from './Like.module.css'
+import {Favorite, FavoriteBorder} from "@mui/icons-material";
 
-type LikePropsType = {
-    like: number
-}
-
-const Like = (props: LikePropsType) => {
-    const [likes, setLikes] = useState(props.like)
-
-    const onClickHandler = () => {
-        if (likes === 0) {
-            setLikes(1);
-        } else {
-            setLikes(0);
-        }
-    };
-
+const Like = () => {
     return (
         <div className={s.likesWrapper}>
-            <div className={s.likesNum}>{likes}</div>
-            {likes === 0 ? (
-                <img
-                    onClick={onClickHandler}
-                    className={s.imgInitial}
-                    src="https://1.bp.blogspot.com/-4pc0ihXaY1Y/YHt0gPmCY0I/AAAAAAAANUw/BKslMmfLjSs7tfSIDjyr_M1w2WSNE_JPgCLcBGAsYHQ/s1200/889140.png"
-                    alt=""
-                />
-            ) : (
-                <img
-                    onClick={onClickHandler}
-                    className={s.img}
-                    src="https://i.ibb.co/thX3jZq/15.png"
-                    alt=""
-                />
-            )}
+            <Checkbox icon={<FavoriteBorder/>} checkedIcon={<Favorite/>}/>
         </div>
     );
 };

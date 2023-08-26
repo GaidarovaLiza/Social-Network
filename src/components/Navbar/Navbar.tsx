@@ -5,7 +5,7 @@ export function Navbar() {
     return (
         <nav className={s.nav}>
             <div className={s.item}>
-                <NavLink to="/profile">Profile</NavLink>
+                <NavLink to="/">Profile</NavLink>
             </div>
             <div className={s.item}>
                 <NavLink to="/dialogs">Massages</NavLink>

@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {usersAPI} from "../api/users-api";
+import {socialNetworkApi} from "../api/socialNetwork-api";
 import {RequestStatusType, setStatusAC} from "../app/appReducer";
 
 const initialState: UsersDataType = {
@@ -60,7 +60,7 @@ export const changeUserStatusAC = (id: string, status: RequestStatusType) => ({
 
 export const getUsersTC = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
     dispatch(setStatusAC('loading'))
-    usersAPI.getUsers(currentPage, pageSize)
+    socialNetworkApi.getUsers(currentPage, pageSize)
         .then((res) => {
             dispatch(setUsersAC(res.data.items))
 
@@ -77,7 +77,7 @@ export const getUsersTC = (currentPage: number, pageSize: number) => (dispatch: 
         })
 }
 export const getPageTC = (pageNumber: number, pageSize: number) => (dispatch: Dispatch<ActionType>) => {
-    usersAPI.getPages(pageNumber, pageSize)
+    socialNetworkApi.getPages(pageNumber, pageSize)
         .then((res) => {
             dispatch(setUsersAC(res.data.items))
         })

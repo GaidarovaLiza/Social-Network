@@ -2,6 +2,8 @@ import s from "./MyPosts.module.css";
 import {Post} from "./Post/Post";
 import React, {ChangeEvent, useState} from "react";
 import {PostsType} from "../../../app/App";
+import SendIcon from "@mui/icons-material/Send";
+import Button from "@mui/material/Button";
 
 type PropsType = {
     posts: PostsType
@@ -40,8 +42,7 @@ export const MyPosts: React.FC<PropsType> = (
                 <img className={s.img} src="https://pixelbox.ru/wp-content/uploads/2021/02/mult-ava-instagram-58.jpg"/>
                 <textarea value={value} onChange={onChangeHandler} placeholder='Write what you wish'
                           className={s.textarea}></textarea>
-                <button onClick={onClickHandler} className={s.button}>Publish
-                </button>
+                <Button onClick={onClickHandler}> Publish</Button>
             </div>
             {postComponents}
         </div>

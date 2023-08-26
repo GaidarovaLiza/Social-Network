@@ -6,13 +6,15 @@ import {UsersReducer} from "./usersReducer";
 import thunk, {ThunkDispatch} from "redux-thunk";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {appReducer} from "../app/appReducer";
+import {authReducer} from "./auth-reducer";
 
 const rootReducers = combineReducers({
     DialogsReducer,
     PostsReducer,
     UsersChatReducer,
     UsersReducer,
-    appReducer
+    appReducer,
+    authReducer
 })
 
 export type AppDispatchType = ThunkDispatch<AppRootStateType, any, AnyAction>

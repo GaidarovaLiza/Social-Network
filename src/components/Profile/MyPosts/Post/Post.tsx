@@ -23,7 +23,7 @@ export function Post(props: PostPropsType) {
                 {props.body}
             </div>
             <div className={s.postFooter}>
-                <Like like={props.like}/>
+                <Like/>
                 <form className={s.postCommentForm}>
                     <input className={s.postComment} type="text"
                            placeholder="Add a comment..."/>
