@@ -1,9 +1,9 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./App.module.css";
 import {Navbar} from "../components/Navbar/Navbar";
 import {Profile} from "../components/Profile/Profile";
 import {Dialogs} from "../components/Dialogs/Dialogs";
-import {BrowserRouter, Navigate, Route, Routes, useLocation} from "react-router-dom";
+import {Navigate, Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import {Music} from "../components/Music/Music";
 import {News} from "../components/News/News";
 import {Settings} from "../components/Settings/Settings";
@@ -11,6 +11,7 @@ import s from './App.module.css'
 import {Users} from "../components/Users/Users";
 import {Header} from "../components/Header/Header";
 import {Login} from "../components/Login/Login";
+import {useAppSelector} from "../Redax/store";
 
 export type PostsType = PostType[]
 
@@ -37,6 +38,14 @@ export type UserType = {
 
 export const App = () => {
     const location = useLocation();
+    const isLoggedIn = useAppSelector(state => state.authReducer.isLoggedIn)
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!isLoggedIn) {
+            navigate('/login');
+        }
+    }, [isLoggedIn, navigate]);
 
     return (
         <div className={s.appWrapper}>

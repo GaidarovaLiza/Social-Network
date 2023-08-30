@@ -8,7 +8,6 @@
 .routes {
     /* контент должен занимать всю доступную ширину */
     display: flex;
-    width: 2000px;
     justify-content: center;
     align-items: center;
 }
