@@ -4,9 +4,9 @@ import {useSelector} from "react-redux";
 import {AppRootStateType, useAppDispatch, useAppSelector} from "../../Redax/store";
 import {followAC, getUsersTC, unfollowAC, UsersDataType} from "../../Redax/usersReducer";
 import {User} from "./User/User";
-import {Pagination} from "../Pagination/Paginations";
 import {CircularProgress} from "@mui/material";
 import {RequestStatusType} from "../../app/appReducer";
+import {BasicPagination} from "../Pagination/BasicPaginations";
 
 export const Users = () => {
     const status = useAppSelector<RequestStatusType>((state) => state.appReducer.status)
@@ -20,21 +20,22 @@ export const Users = () => {
         dispatch(getUsersTC(users.currentPage, users.pageSize));
     }, []);
 
+
+    const usersMapped = users.items.map(u => <User name={u.name}
+                                                   id={u.id}
+                                                   followed={u.followed}
+                                                   followClickHandler={followClickHandler}
+                                                   unFollowClickHandler={unFollowClickHandler}
+        />
+    )
+
+    const isFetching = status === 'loading';
+
     return (
         <div className={s.mainContainer}>
-            {status === 'loading' && <CircularProgress/>}
-            {users.items.map(u => <User name={u.name}
-                                        id={u.id}
-                                        followed={u.followed}
-                                        followClickHandler={followClickHandler}
-                                        unFollowClickHandler={unFollowClickHandler}
-                />
-            )}
-            <div>
-                <Pagination
-                    users={users}
-                />
-            </div>
+            {isFetching && <CircularProgress/>}
+            {usersMapped}
+            <BasicPagination users={users}/>
         </div>
     );
 };

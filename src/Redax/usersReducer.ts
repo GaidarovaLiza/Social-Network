@@ -6,7 +6,7 @@ const initialState: UsersDataType = {
     items: [],
     totalCount: 0,
     pages: [],
-    pageSize: 7,
+    pageSize: 5,
     pageCount: 0,
     currentPage: 1,
     portionNumber: 1,
@@ -29,10 +29,6 @@ export const UsersReducer = (state: UsersDataType = initialState, action: Action
             return {...state, pageCount: action.pageCount};
         case "SET-PORTION-NUMBER":
             return {...state, portionNumber: action.portionNumber};
-        case "NEXT-PORTION":
-            return {...state, portionNumber: action.portionNumber + 1}
-        case "PREV-PORTION":
-            return {...state, portionNumber: action.portionNumber - 1}
         default: {
             return state
         }
@@ -48,8 +44,6 @@ export const setCurrentPageAC = (pageNumber: number) => ({type: "SET-CURRENT-PAG
 export const setPagesAC = (pages: Array<number>) => ({type: 'SET-PAGES', pages} as const);
 export const setPageCountAC = (pageCount: number) => ({type: 'SET-PAGE-COUNT', pageCount} as const);
 export const setPortionNumberAC = (portionNumber: number) => ({type: "SET-PORTION-NUMBER", portionNumber} as const);
-export const nextPortionAC = (portionNumber: number) => ({type: "NEXT-PORTION", portionNumber} as const);
-export const prevPortionAC = (portionNumber: number) => ({type: "PREV-PORTION", portionNumber} as const);
 export const changeUserStatusAC = (id: string, status: RequestStatusType) => ({
     type: 'CHANGE-USER-STATUS',
     id,
@@ -58,24 +52,28 @@ export const changeUserStatusAC = (id: string, status: RequestStatusType) => ({
 
 //thunk
 
-export const getUsersTC = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
-    dispatch(setStatusAC('loading'))
-    socialNetworkApi.getUsers(currentPage, pageSize)
-        .then((res) => {
-            dispatch(setUsersAC(res.data.items))
+export const getUsersTC = (currentPage: number, pageSize: number) => async (dispatch: Dispatch) => {
+    try {
+        dispatch(setStatusAC('loading'));
+        const res = await socialNetworkApi.getUsers(currentPage, pageSize);
 
-            let pageCount = Math.ceil(res.data.totalCount / pageSize);
-            let pages: Array<number> = [];
+        dispatch(setUsersAC(res.data.items));
 
-            for (let i = 1; i <= pageCount; i++) {
-                pages.push(i);
-            }
+        let pageCount = Math.ceil(res.data.totalCount / pageSize);
+        let pages: Array<number> = [];
 
-            dispatch(setPagesAC(pages));
-            dispatch(setPageCountAC(pageCount));
-            dispatch(setStatusAC('succeeded'));
-        })
-}
+        for (let i = 1; i <= pageCount; i++) {
+            pages.push(i);
+        }
+
+        dispatch(setPagesAC(pages));
+        dispatch(setPageCountAC(pageCount));
+        dispatch(setStatusAC('succeeded'));
+    } catch (error) {
+        // Обработка ошибок, если необходимо
+    }
+};
+
 export const getPageTC = (pageNumber: number, pageSize: number) => (dispatch: Dispatch<ActionType>) => {
     socialNetworkApi.getPages(pageNumber, pageSize)
         .then((res) => {
@@ -116,6 +114,4 @@ type ActionType =
     | ReturnType<typeof setPagesAC>
     | ReturnType<typeof setPageCountAC>
     | ReturnType<typeof setPortionNumberAC>
-    | ReturnType<typeof nextPortionAC>
-    | ReturnType<typeof prevPortionAC>
     | ReturnType<typeof changeUserStatusAC>
