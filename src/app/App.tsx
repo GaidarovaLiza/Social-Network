@@ -1,17 +1,19 @@
 import React, {useEffect} from "react";
 import "./App.module.css";
-import {Navbar} from "../components/Navbar/Navbar";
-import {Profile} from "../components/Profile/Profile";
-import {Dialogs} from "../components/Dialogs/Dialogs";
+import {Navbar} from "components/Navbar/Navbar";
+import {Profile} from "components/Profile/Profile";
+import {Dialogs} from "components/Dialogs/Dialogs";
 import {Navigate, Route, Routes, useLocation, useNavigate} from "react-router-dom";
-import {Music} from "../components/Music/Music";
-import {News} from "../components/News/News";
-import {Settings} from "../components/Settings/Settings";
+import {Music} from "components/Music/Music";
+import {News} from "components/News/News";
+import {Settings} from "components/Settings/Settings";
 import s from './App.module.css'
-import {Users} from "../components/Users/Users";
-import {Header} from "../components/Header/Header";
-import {Login} from "../components/Login/Login";
-import {useAppSelector} from "../Redax/store";
+import {Users} from "components/Users/Users";
+import {Header} from "components/Header/Header";
+import {Login} from "components/Login/Login";
+import {useAppDispatch, useAppSelector} from "Redax/store";
+import {initializeAppTC} from "./appReducer";
+import {CircularProgress} from "@mui/material";
 
 export type PostsType = PostType[]
 
@@ -38,14 +40,28 @@ export type UserType = {
 
 export const App = () => {
     const location = useLocation();
-    const isLoggedIn = useAppSelector(state => state.authReducer.isLoggedIn)
+    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
+    const isInitialized = useAppSelector(state => state.appReducer.isInitialized)
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch(initializeAppTC());
+    }, []);
 
     useEffect(() => {
         if (!isLoggedIn) {
             navigate('/login');
         }
     }, [isLoggedIn, navigate]);
+
+    if (!isInitialized) {
+        return (
+            <div style={{position: "fixed", top: "30%", textAlign: "center", width: "100%"}}>
+                <CircularProgress/>
+            </div>
+        );
+    }
 
     return (
         <div className={s.appWrapper}>

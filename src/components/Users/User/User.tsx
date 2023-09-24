@@ -1,4 +1,5 @@
 import React, {FC} from 'react';
+import {NavLink} from 'react-router-dom';
 import s from './User.module.css'
 
 type UserPropsType = {
@@ -24,7 +25,9 @@ export const User: FC<UserPropsType> = (
         <div className={s.userList}>
             <div className={s.user}>
                 <div className={s.userAvatar}>
-                    <img src="https://via.placeholder.com/150" alt="User Avatar"/>
+                    <NavLink to={'/profile' + id}>
+                        <img src="https://via.placeholder.com/150" alt="User Avatar"/>
+                    </NavLink>
                 </div>
                 <div className={s.userInfo}>
                     <div className={s.userName}>{name}</div>

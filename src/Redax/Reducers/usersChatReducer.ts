@@ -1,5 +1,5 @@
 import {v1} from "uuid";
-import {UsersType} from "../app/App";
+import {UsersType} from "../../app/App";
 
 const initialState: UsersType = [
     {id: v1(), name: 'Bob'},

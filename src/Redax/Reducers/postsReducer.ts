@@ -1,5 +1,6 @@
-import {PostType} from "./State";
+import {PostType} from "../State";
 import {v1} from "uuid";
+import {Dispatch} from "redux";
 
 type ActionType = AddPostACType
 
@@ -23,3 +24,7 @@ export const PostsReducer = (state = initialState, action: ActionType): PostType
 type AddPostACType = ReturnType<typeof addPostAC>
 
 export const addPostAC = (body: string) => ({type: "ADD-POST", body} as const)
+
+export const addPostTC = () => (dispatch: Dispatch) => {
+
+}

@@ -1,6 +1,6 @@
 import {Dispatch} from "redux";
-import {socialNetworkApi} from "../api/socialNetwork-api";
-import {RequestStatusType, setStatusAC} from "../app/appReducer";
+import {socialNetworkApi} from "../../api/socialNetwork-api";
+import {RequestStatusType, setStatusAC} from "../../app/appReducer";
 
 const initialState: UsersDataType = {
     items: [],

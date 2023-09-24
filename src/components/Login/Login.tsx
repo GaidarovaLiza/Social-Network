@@ -10,9 +10,9 @@ import Button from '@mui/material/Button';
 import {useFormik} from "formik";
 import {Navigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../Redax/store";
-import {loginTC} from "../../Redax/auth-reducer";
+import {loginTC} from "../../Redax/Reducers/auth-reducer";
+import {LinearProgress} from "@mui/material";
 import s from './Login.module.css'
-
 
 type ErrorType = {
     email?: string
@@ -28,7 +28,8 @@ export type FormType = {
 
 export const Login = () => {
     const dispatch = useAppDispatch()
-    const isLoggedIn = useAppSelector(state => state.authReducer.isLoggedIn)
+    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
+    const status = useAppSelector(state => state.appReducer.status)
 
     const formik = useFormik({
         initialValues: {
@@ -59,6 +60,8 @@ export const Login = () => {
     if (isLoggedIn) return <Navigate to={'/'}/>
 
     return (
+        <div className={s.loginContent}>
+            {status === 'loading' && <LinearProgress/>}
             <Grid container justifyContent={'center'}>
                 <Grid item justifyContent={'center'}>
                     <form onSubmit={formik.handleSubmit}>
@@ -101,5 +104,6 @@ export const Login = () => {
                     </form>
                 </Grid>
             </Grid>
+        </div>
     )
 }

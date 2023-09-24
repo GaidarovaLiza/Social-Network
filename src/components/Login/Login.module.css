@@ -1,8 +1,4 @@
-.login-content {
-    display: flex;
+.loginContent {
+    min-width: 1200px;
 }
 
-.img {
-    width: 300px;
-    height: 300px;
-}

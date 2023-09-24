@@ -1,5 +1,6 @@
 .appWrapper {
     display: flex;
+    justify-content: center;
     height: 100vh; /* задаем высоту контейнера на всю высоту окна браузера */
     max-width: 1200px;
     margin: 0 auto;
@@ -10,4 +11,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
 }

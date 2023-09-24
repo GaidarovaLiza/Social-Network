@@ -1,9 +1,9 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import s from "./Users.module.css";
 import {User} from "./User/User";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../Redax/store";
-import {followAC, setUsersAC, unfollowAC, UsersDataType, UserType} from "../../Redax/usersReducer";
+import {followAC, setUsersAC, unfollowAC, UserType} from "../../Redax/Reducers/usersReducer";
 import axios from "axios";
 import {Dispatch} from "redux";
 

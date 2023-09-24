@@ -4,7 +4,7 @@ import {MessageItem} from "./MessageItem/MessageItem";
 import React, {ChangeEvent, useState} from "react";
 import {DialogHeader} from "./DialogHeader/DialogHeader";
 import {MessagesType, UsersType} from "../../app/App";
-import {addMessageAC} from "../../Redax/dialogsReducer";
+import {addMessageAC} from "../../Redax/Reducers/dialogsReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../Redax/store";
 import Button from "@mui/material/Button";

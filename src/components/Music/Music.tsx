@@ -1,5 +1,5 @@
-export const Music = ()=>{
-	return (
-		<div>Music</div>
-	)
+export const Music = () => {
+    return (
+        <div>Music</div>
+    )
 }

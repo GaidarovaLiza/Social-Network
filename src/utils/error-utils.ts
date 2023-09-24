@@ -19,4 +19,4 @@ export const handleServerNetworkError = (dispatch: ErrorUtilsDispatchType, error
 }
 
 
-type ErrorUtilsDispatchType =  Dispatch<SetStatusType | SetErrorType>
+type ErrorUtilsDispatchType = Dispatch<SetStatusType | SetErrorType>

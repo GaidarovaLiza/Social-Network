@@ -1,5 +1,5 @@
 import {v1} from "uuid";
-import {MessageType} from "./State";
+import {MessageType} from "../State";
 
 const initialState: MessageType[] = [
     {id: v1(), message: 'Hi!'},

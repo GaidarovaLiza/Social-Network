@@ -15,6 +15,6 @@ export const MessageItem = (props: MessagePropsType) => {
             </div>
 
         </div>
-)
+    )
 }
 

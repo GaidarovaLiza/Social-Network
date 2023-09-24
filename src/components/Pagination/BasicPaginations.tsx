@@ -1,10 +1,5 @@
 import React from "react";
-import {
-    getPageTC,
-    setCurrentPageAC,
-    setPortionNumberAC,
-    UsersDataType,
-} from "../../Redax/usersReducer";
+import {getPageTC, setCurrentPageAC, setPortionNumberAC, UsersDataType,} from "../../Redax/Reducers/usersReducer";
 import {useAppDispatch} from "../../Redax/store";
 import {Pagination} from "@mui/material";
 
@@ -13,7 +8,9 @@ type PropsType = {
 };
 
 export const BasicPagination: React.FC<PropsType> = ({users}) => {
-    const {currentPage, pageSize} = users;
+    const {currentPage, pageSize, pages} = users;
+
+    console.log(pages)
     const dispatch = useAppDispatch()
 
     const onPageChangedHandler = (pageNumber: number) => {

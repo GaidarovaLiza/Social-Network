@@ -11,14 +11,20 @@ export const authAPI = {
     login(data: FormType) {
         return instance.post<null, AxiosResponse<ResponseType<{ userId: number }>>, FormType>('auth/login', data);
     },
+    me() {
+        return instance.get<ResponseType<{ id: number; email: string; login: string }>>('auth/me')
+    }
 }
 
 export const socialNetworkApi = {
     getUsers(currentPage: number, pageSize: number) {
         return instance.get(`/users?page=${currentPage}&count=${pageSize}`)
     },
-    getPages(pageNumber: number, pageSize: number){
+    getPages(pageNumber: number, pageSize: number) {
         return instance.get(`/users?page=${pageNumber}&count=${pageSize}`)
+    },
+    getUserPage(userId: string) {
+        return instance.get(`/profile/${userId}`)
     }
 }
 

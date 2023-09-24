@@ -2,22 +2,19 @@ import s from "./MyPosts.module.css";
 import {Post} from "./Post/Post";
 import React, {ChangeEvent, useState} from "react";
 import {PostsType} from "../../../app/App";
-import SendIcon from "@mui/icons-material/Send";
 import Button from "@mui/material/Button";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "../../../Redax/store";
+import {addPostAC} from "../../../Redax/Reducers/postsReducer";
 
-type PropsType = {
-    posts: PostsType
-    addPost: (body: string) => void
-}
-
-export const MyPosts: React.FC<PropsType> = (
-    {
-        posts,
-        addPost
-    }
-) => {
+export const MyPosts = () => {
     const [value, setValue] = useState('')
+    let posts = useSelector<AppRootStateType, PostsType>(state => state.PostsReducer)
+    const dispatch = useDispatch()
 
+    const addPost = (body: string) => {
+        dispatch(addPostAC(body))
+    }
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setValue(e.currentTarget.value)
