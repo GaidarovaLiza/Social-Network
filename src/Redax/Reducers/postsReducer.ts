@@ -1,30 +1,21 @@
 import {PostType} from "../State";
 import {v1} from "uuid";
-import {Dispatch} from "redux";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-type ActionType = AddPostACType
 
-let initialState: PostType[] = [
-    {id: v1(), name: 'John Doe', body: 'How are you?', likes: 0},
-    {id: v1(), name: 'John Doe', body: 'This is my first post', likes: 0}
-]
+let initialState: PostType[] = []
 
-export const PostsReducer = (state = initialState, action: ActionType): PostType[] => {
-    switch (action.type) {
-        case 'ADD-POST': {
-            let newPost = {id: v1(), name: 'John Doe', body: action.body, likes: 0}
-            return [newPost, ...state]
-        }
-        default: {
-            return state
+const slice = createSlice({
+        name: 'posts',
+        initialState,
+        reducers: {
+            addPost: (state, action: PayloadAction<{ body: string }>) => {
+                let newPost = {id: v1(), name: 'Fixed', body: action.payload.body, likes: 0}
+                state.unshift(newPost)
+            }
         }
     }
-}
+)
 
-type AddPostACType = ReturnType<typeof addPostAC>
-
-export const addPostAC = (body: string) => ({type: "ADD-POST", body} as const)
-
-export const addPostTC = () => (dispatch: Dispatch) => {
-
-}
+export const postsReducer = slice.reducer
+export const postsActions = slice.actions

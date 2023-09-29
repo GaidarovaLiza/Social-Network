@@ -1,19 +1,19 @@
 import s from "./MyPosts.module.css";
 import {Post} from "./Post/Post";
 import React, {ChangeEvent, useState} from "react";
-import {PostsType} from "../../../app/App";
+import {PostsType} from "app/App";
 import Button from "@mui/material/Button";
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../../../Redax/store";
-import {addPostAC} from "../../../Redax/Reducers/postsReducer";
+import {AppRootStateType} from "Redax/store";
+import {postsActions} from "Redax/Reducers/postsReducer";
 
 export const MyPosts = () => {
     const [value, setValue] = useState('')
-    let posts = useSelector<AppRootStateType, PostsType>(state => state.PostsReducer)
+    let posts = useSelector<AppRootStateType, PostsType>(state => state.posts)
     const dispatch = useDispatch()
 
     const addPost = (body: string) => {
-        dispatch(addPostAC(body))
+        dispatch(postsActions.addPost({body: body}))
     }
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {

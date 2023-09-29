@@ -1,8 +1,8 @@
 import {AnyAction, combineReducers} from "redux";
-import {PostsReducer} from "./Reducers/postsReducer";
-import {DialogsReducer} from "./Reducers/dialogsReducer";
+import {postsReducer} from "./Reducers/postsReducer";
+import {dialogsReducer} from "./Reducers/dialogsReducer";
 import {UsersChatReducer} from "./Reducers/usersChatReducer";
-import {UsersReducer} from "./Reducers/usersReducer";
+import {usersReducer} from "./Reducers/usersReducer";
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {appReducer} from "app/appReducer";
@@ -11,11 +11,11 @@ import {userPageReducer} from "./Reducers/userPage-reducer";
 import {configureStore} from "@reduxjs/toolkit";
 
 const rootReducers = combineReducers({
-    DialogsReducer,
-    PostsReducer,
+    dialogs: dialogsReducer,
+    posts: postsReducer,
     UsersChatReducer,
-    UsersReducer,
-    appReducer,
+    users: usersReducer,
+    app: appReducer,
     auth: authReducer,
     userPageReducer
 })

@@ -1,33 +1,24 @@
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {v1} from "uuid";
-import {MessageType} from "../State";
 
-const initialState: MessageType[] = [
-    {id: v1(), message: 'Hi!'},
-    {id: v1(), message: 'How are you doing?'},
-    {id: v1(), message: 'Yo!'},
-]
+export type MessageType = {
+    id: string
+    message: string
+}
 
-type ActionType = AddMessageACType
+const initialState: MessageType[] = []
 
-export const DialogsReducer = (state = initialState, action: ActionType) => {
-    switch (action.type) {
-        case 'ADD-MESSAGE': {
+export const slice = createSlice({
+    name: 'dialogs',
+    initialState,
+    reducers: {
+        addMessage: (state, action: PayloadAction<{ message: string }>) => {
             const newMessage = {id: v1(), message: action.payload.message}
-            return [...state, newMessage]
-        }
-        default: {
-            return state
+            state.push(newMessage)
         }
     }
-}
+})
 
-type AddMessageACType = ReturnType<typeof addMessageAC>
+export const dialogsReducer = slice.reducer
+export const dialogsActions = slice.actions
 
-export const addMessageAC = (message: string) => {
-    return {
-        type: "ADD-MESSAGE",
-        payload: {
-            message
-        }
-    } as const
-}

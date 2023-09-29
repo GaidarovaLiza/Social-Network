@@ -1,22 +1,18 @@
-import {setErrorAC, SetErrorType, setStatusAC, SetStatusType} from "../app/appReducer";
+import {appActions} from "app/appReducer";
 import {Dispatch} from "redux";
-import {ResponseType} from "../api/socialNetwork-api";
+import {ResponseType} from "api/socialNetwork-api";
 
-
-export const handleServerAppError = <T>(dispatch: ErrorUtilsDispatchType, data: ResponseType<T>) => {
+export const handleServerAppError = <T>(dispatch: Dispatch, data: ResponseType<T>) => {
     const error = data.messages[0];
     if (error) {
-        dispatch(setErrorAC(error));
+        dispatch(appActions.setError({error: 'Some error'}));
     } else {
-        dispatch(setErrorAC('Some error'));
+        dispatch(appActions.setError({error: 'Some error'}));
     }
-    dispatch(setStatusAC('failed'))
+    dispatch(appActions.setStatus({status: 'failed'}))
 }
 
-export const handleServerNetworkError = (dispatch: ErrorUtilsDispatchType, error: { message: string }) => {
-    dispatch(setErrorAC(error.message ? error.message : "Some error occurred"));
-    dispatch(setStatusAC('failed'))
+export const handleServerNetworkError = (dispatch: Dispatch, error: { message: string }) => {
+    dispatch(appActions.setError({error: "Some error occurred"}));
+    dispatch(appActions.setStatus({status: 'failed'}))
 }
-
-
-type ErrorUtilsDispatchType = Dispatch<SetStatusType | SetErrorType>

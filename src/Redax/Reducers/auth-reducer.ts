@@ -1,9 +1,9 @@
 import {FormType} from "components/Login/Login";
-import {setStatusAC} from "app/appReducer";
 import {authAPI, Result_Code} from "api/socialNetwork-api";
 import {handleServerAppError, handleServerNetworkError} from "utils/error-utils";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {AppThunk} from "Redax/store";
+import {appActions} from "app/appReducer";
 
 const slice = createSlice({
     name: "auth",
@@ -22,12 +22,12 @@ export const authActions = slice.actions
 
 // thunks
 export const loginTC = (data: FormType): AppThunk => async (dispatch) => {
-    dispatch(setStatusAC('loading'))
+    dispatch(appActions.setStatus({status: 'loading'}))
     try {
         const res = await authAPI.login(data)
         if (res.data.resultCode === Result_Code.OK) {
             dispatch(authActions.setIsLoggedIn({isLoggedIn: true}))
-            dispatch(setStatusAC('succeeded'))
+            dispatch(appActions.setStatus({status: 'succeeded'}))
         } else {
             handleServerAppError(dispatch, res.data)
         }

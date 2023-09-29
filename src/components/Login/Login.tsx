@@ -9,8 +9,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useFormik} from "formik";
 import {Navigate} from "react-router-dom";
-import {useAppDispatch, useAppSelector} from "../../Redax/store";
-import {loginTC} from "../../Redax/Reducers/auth-reducer";
+import {useAppDispatch, useAppSelector} from "Redax/store";
+import {loginTC} from "Redax/Reducers/auth-reducer";
 import {LinearProgress} from "@mui/material";
 import s from './Login.module.css'
 
@@ -29,7 +29,7 @@ export type FormType = {
 export const Login = () => {
     const dispatch = useAppDispatch()
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
-    const status = useAppSelector(state => state.appReducer.status)
+    const status = useAppSelector(state => state.app.status)
 
     const formik = useFormik({
         initialValues: {

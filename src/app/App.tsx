@@ -41,7 +41,7 @@ export type UserType = {
 export const App = () => {
     const location = useLocation();
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
-    const isInitialized = useAppSelector(state => state.appReducer.isInitialized)
+    const isInitialized = useAppSelector(state => state.app.isInitialized)
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 

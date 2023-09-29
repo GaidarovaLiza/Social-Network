@@ -3,21 +3,18 @@ import s from "./Dialogs.module.css";
 import {MessageItem} from "./MessageItem/MessageItem";
 import React, {ChangeEvent, useState} from "react";
 import {DialogHeader} from "./DialogHeader/DialogHeader";
-import {MessagesType, UsersType} from "../../app/App";
-import {addMessageAC} from "../../Redax/Reducers/dialogsReducer";
+import {MessagesType, UsersType} from "app/App";
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../../Redax/store";
+import {AppRootStateType} from "Redax/store";
 import Button from "@mui/material/Button";
 import SendIcon from '@mui/icons-material/Send';
+import {dialogsActions} from "Redax/Reducers/dialogsReducer";
 
 export const Dialogs = () => {
-    let dialogs = useSelector<AppRootStateType, MessagesType>(state => state.DialogsReducer)
+    let dialogs = useSelector<AppRootStateType, MessagesType>(state => state.dialogs)
     let users = useSelector<AppRootStateType, UsersType>(state => state.UsersChatReducer)
 
     const dispatch = useDispatch()
-
-    //add commit
-
     const [newMessage, setNewMessage] = useState("");
 
     const ElementsDialogItem = users.map(el => <DialogItem id={el.id} name={el.name}/>)
@@ -31,7 +28,7 @@ export const Dialogs = () => {
 
     const sendMessage = () => {
         if (newMessage.trim()) {
-            dispatch(addMessageAC(newMessage));
+            dispatch(dialogsActions.addMessage({message: newMessage}));
             setNewMessage("");
         }
     };

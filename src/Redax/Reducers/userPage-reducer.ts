@@ -1,6 +1,6 @@
 import {Dispatch} from "redux";
-import {setStatusAC} from "../../app/appReducer";
-import {socialNetworkApi} from "../../api/socialNetwork-api";
+import {socialNetworkApi} from "api/socialNetwork-api";
+import {appActions} from "app/appReducer";
 
 const initialState: InitialStateType = {
     aboutMe: "я круто чувак 1001%",
@@ -41,11 +41,11 @@ export const getUserAC = (user: InitialStateType) => ({type: "GET-USER", user} a
 
 export const getUserTC = (userId: string) => async (dispatch: Dispatch) => {
     try {
-        dispatch(setStatusAC('loading'))
+        dispatch(appActions.setStatus({status: 'loading'}))
         const res = await socialNetworkApi.getUserPage(userId)
 
         dispatch(getUserAC(res.data.data))
-        dispatch(setStatusAC('succeeded'));
+        dispatch(appActions.setStatus({status: 'succeeded'}))
     } catch (error) {
         //error
     }

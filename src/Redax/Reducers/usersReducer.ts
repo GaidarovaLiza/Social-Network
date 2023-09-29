@@ -1,6 +1,8 @@
 import {Dispatch} from "redux";
-import {socialNetworkApi} from "../../api/socialNetwork-api";
-import {RequestStatusType, setStatusAC} from "../../app/appReducer";
+import {socialNetworkApi} from "api/socialNetwork-api";
+import {appActions} from "app/appReducer";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {AppThunk} from "Redax/store";
 
 const initialState: UsersDataType = {
     items: [],
@@ -13,51 +15,59 @@ const initialState: UsersDataType = {
     error: null
 };
 
-export const UsersReducer = (state: UsersDataType = initialState, action: ActionType): UsersDataType => {
-    switch (action.type) {
-        case 'FOLLOW':
-            return {...state, items: state.items.map(u => u.id == action.userID ? {...u, followed: true} : u)}
-        case "UNFOLLOW":
-            return {...state, items: state.items.map(u => u.id === action.userID ? {...u, followed: false} : u)}
-        case "SET-USERS":
-            return {...state, items: [...action.users]}
-        case "SET-CURRENT-PAGE":
-            return {...state, currentPage: action.pageNumber}
-        case 'SET-PAGES':
-            return {...state, pages: action.pages};
-        case 'SET-PAGE-COUNT':
-            return {...state, pageCount: action.pageCount};
-        case "SET-PORTION-NUMBER":
-            return {...state, portionNumber: action.portionNumber};
-        default: {
-            return state
+const slice = createSlice({
+    name: 'users',
+    initialState,
+    reducers: {
+        follow: (state, action: PayloadAction<{ userID: number }>) => {
+            const index = state.items.findIndex(t => t.id === action.payload.userID);
+            if (index !== -1) {
+                state.items[index].followed = true;
+            }
+        },
+        unfollow: (state, action: PayloadAction<{ userID: number }>) => {
+            const index = state.items.findIndex(t => t.id === action.payload.userID);
+            if (index !== -1) {
+                state.items[index].followed = false;
+            }
+        },
+        setUsers: (state, action: PayloadAction<{ users: UserType[] }>) => {
+            state.items = action.payload.users
+        },
+        setCurrentPage: (state, action: PayloadAction<{ pageNumber: number }>) => {
+            state.currentPage = action.payload.pageNumber
+        },
+        setPage: (state, action: PayloadAction<{ pages: number[] }>) => {
+            state.pages = action.payload.pages
+        },
+        setPageCount: (state, action: PayloadAction<{ pageCount: number }>) => {
+            state.pageCount = action.payload.pageCount
+        },
+        setPortionNumber: (state, action: PayloadAction<{ portionNumber: number }>) => {
+            state.portionNumber = action.payload.portionNumber
         }
     }
-}
+})
+
+export const usersReducer = slice.reducer
+export const usersActions = slice.actions
 
 //actions
 
-export const followAC = (userID: number) => ({type: "FOLLOW", userID} as const)
-export const unfollowAC = (userID: number) => ({type: "UNFOLLOW", userID} as const)
-export const setUsersAC = (users: UserType[]) => ({type: 'SET-USERS', users} as const)
-export const setCurrentPageAC = (pageNumber: number) => ({type: "SET-CURRENT-PAGE", pageNumber} as const)
-export const setPagesAC = (pages: Array<number>) => ({type: 'SET-PAGES', pages} as const);
-export const setPageCountAC = (pageCount: number) => ({type: 'SET-PAGE-COUNT', pageCount} as const);
-export const setPortionNumberAC = (portionNumber: number) => ({type: "SET-PORTION-NUMBER", portionNumber} as const);
-export const changeUserStatusAC = (id: string, status: RequestStatusType) => ({
-    type: 'CHANGE-USER-STATUS',
-    id,
-    status
-} as const)
+// export const changeUserStatusAC = (id: string, status: RequestStatusType) => ({
+//     type: 'CHANGE-USER-STATUS',
+//     id,
+//     status
+// } as const)
 
 //thunk
 
 export const getUsersTC = (currentPage: number, pageSize: number) => async (dispatch: Dispatch) => {
     try {
-        dispatch(setStatusAC('loading'));
+        dispatch(appActions.setStatus({status: 'loading'}));
         const res = await socialNetworkApi.getUsers(currentPage, pageSize);
 
-        dispatch(setUsersAC(res.data.items));
+        dispatch(usersActions.setUsers({users: res.data.items}));
 
         let pageCount = Math.ceil(res.data.totalCount / pageSize);
         let pages: Array<number> = [];
@@ -66,23 +76,22 @@ export const getUsersTC = (currentPage: number, pageSize: number) => async (disp
             pages.push(i);
         }
 
-        dispatch(setPagesAC(pages));
-        dispatch(setPageCountAC(pageCount));
-        dispatch(setStatusAC('succeeded'));
+        dispatch(usersActions.setPage({pages: pages}));
+        dispatch(usersActions.setPageCount({pageCount: pageCount}));
+        dispatch(appActions.setStatus({status: 'succeeded'}));
     } catch (error) {
-        // Обработка ошибок, если необходимо
+
     }
 };
 
-export const getPageTC = (pageNumber: number, pageSize: number) => (dispatch: Dispatch<ActionType>) => {
+export const getPageTC = (pageNumber: number, pageSize: number): AppThunk => (dispatch) => {
     socialNetworkApi.getPages(pageNumber, pageSize)
         .then((res) => {
-            dispatch(setUsersAC(res.data.items))
+            dispatch(usersActions.setUsers({users: res.data.items}))
         })
 }
 
 //types
-
 export type UserType = {
     name: string;
     id: number;
@@ -105,13 +114,3 @@ export type UsersDataType = {
     portionNumber: number;
     error: string | null;
 }
-
-type ActionType =
-    ReturnType<typeof followAC>
-    | ReturnType<typeof unfollowAC>
-    | ReturnType<typeof setUsersAC>
-    | ReturnType<typeof setCurrentPageAC>
-    | ReturnType<typeof setPagesAC>
-    | ReturnType<typeof setPageCountAC>
-    | ReturnType<typeof setPortionNumberAC>
-    | ReturnType<typeof changeUserStatusAC>
