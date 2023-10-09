@@ -17,8 +17,6 @@ export const ProfileInfo = () => {
         };
     }, [user]);
 
-    console.log(user.fullName)
-
     return (
         <div className="profile">
             <div className="profile-header">
