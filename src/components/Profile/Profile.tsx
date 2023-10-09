@@ -4,12 +4,10 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import React from "react";
 
 export const Profile = () => {
-
-
     return (
         <div className={s.content}>
-            <MyPosts/>
             <ProfileInfo/>
+            <MyPosts/>
         </div>
     );
 }

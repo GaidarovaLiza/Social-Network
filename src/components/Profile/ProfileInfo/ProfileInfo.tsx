@@ -1,6 +1,7 @@
-import {useAppDispatch, useAppSelector} from "../../../Redax/store";
+import {useAppDispatch, useAppSelector} from "Redax/store";
 import {useEffect} from "react";
-import {getUserTC} from "../../../Redax/Reducers/userPage-reducer";
+import {getUserTC} from "Redax/Reducers/userPage-reducer";
+import s from "components/Profile/MyPosts/MyPosts.module.css";
 
 export const ProfileInfo = () => {
     const user = useAppSelector(state => state.userPageReducer)
@@ -19,13 +20,24 @@ export const ProfileInfo = () => {
     console.log(user.fullName)
 
     return (
-        <div>
-            {/*<p>{user.fullName}</p>*/}
-            {/*<li>{user.contacts.facebook}</li>*/}
-            {/*<li>{user.contacts.vk}</li>*/}
-            {/*<li>{user.contacts.github}</li>*/}
-            {/*<li>{user.contacts.instagram}</li>*/}
-            {user.userId}
+        <div className="profile">
+            <div className="profile-header">
+                <img className={s.img} src="https://pixelbox.ru/wp-content/uploads/2021/02/mult-ava-instagram-58.jpg"
+                     alt="Profile Picture"/>
+                <p>Artem Skakun</p>
+                <p>About me: let's do that)</p>
+                <p>Job: react redux css html</p>
+            </div>
+            <div className="profile-contacts">
+                <p>Contacts:</p>
+                <div>
+                    <a href="https://www.facebook.com">Facebook</a>
+                    <a href="https://vk.com">VK</a>
+                    <a href="https://twitter.com">Twitter</a>
+                    <a href="https://www.instagram.com">Instagram</a>
+                    <a href="https://github.com">GitHub</a>
+                </div>
+            </div>
         </div>
     );
 };

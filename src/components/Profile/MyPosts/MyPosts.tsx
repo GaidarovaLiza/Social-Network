@@ -3,14 +3,14 @@ import {Post} from "./Post/Post";
 import React, {ChangeEvent, useState} from "react";
 import {PostsType} from "app/App";
 import Button from "@mui/material/Button";
-import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "Redax/store";
+import { useSelector} from "react-redux";
+import {AppRootStateType, useAppDispatch} from "Redax/store";
 import {postsActions} from "Redax/Reducers/postsReducer";
 
 export const MyPosts = () => {
     const [value, setValue] = useState('')
     let posts = useSelector<AppRootStateType, PostsType>(state => state.posts)
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const addPost = (body: string) => {
         dispatch(postsActions.addPost({body: body}))
